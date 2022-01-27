@@ -1,0 +1,17 @@
+<div class="card h-100">
+    {{ $page := . }}
+    <a href="{{ $page.RelPermalink }}" class="d-block">
+      <img data-src="{{ $page.Params.image }}" src="{{ $page.Params.image }}" class="card-img-top mx-auto d-block" alt="{{ $page.Title }}">
+    </a>
+
+  <div class="card-body">
+      <a href="{{ $page.RelPermalink }}">
+        <h4 class="card-title">{{ $page.Title }}</h4>
+      </a>
+      <p class="card-text date text-uppercase">{{ $page.Date.Format (.Site.Params.dateFormat | default "January 2, 2006" ) }}</p>
+      <div class="card-text">
+          {{ $page.Summary | htmlUnescape }}
+      </div>
+  </div>
+
+</div>

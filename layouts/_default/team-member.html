@@ -1,0 +1,9 @@
+{{ $page := . }}
+<div class="text-center">
+  <a href="{{ $page.RelPermalink }}">
+    <img class="default-team-photo" src="{{ $page.Params.image }}" alt="{{ $page.Params.Name }} - team image">
+  </a>
+  <p class="h3-heading mb-0 pt-3">{{ $page.Params.Name }}</p>
+  <p class="h5-heading">{{ $page.Params.position }}</p>
+
+</div>

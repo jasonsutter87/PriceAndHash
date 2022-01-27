@@ -1,0 +1,27 @@
+{{ define "main" }}
+<section id="inner-jumbotron-section">
+  <div class="site-container-1600">
+    <div class="row">
+      <div class="col-12 ">
+        <h1 class="h1-heading white-text">Blog</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Index main content -->
+  <div class="">
+    <!-- Web Development -->
+    <section class="blog-page-section">
+      <div class="site-container-1600 p-3">
+        <div class="row ">
+          {{ range .Pages }}
+          <div class="col-12 col-lg-4  mb-3">
+            {{ .Render "card" }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  </div>
+{{ end }}
