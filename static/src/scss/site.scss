@@ -853,3 +853,11 @@ p {
   width: 1rem;
   margin-right: .5rem;
 }
+
+
+canvas#myChart {
+    width: 100%;
+    max-width: 1600px;
+    height: 800px !important;
+    margin: 0 auto;
+}

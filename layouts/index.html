@@ -6,55 +6,90 @@
   <div class="site-container-1600">
     <div class="row">
       <div class="col-12 text-center">
-        <h1>Bitcoin Price and Hash</h1>
+        <h1>Bitcoin Price and Greed</h1>
       </div>
       <div class="col-12" id="price-and-hash-content">
 
 
 
       </div>
+
+
+      <div class="col-12">
+
+        <canvas id="myChart" width="400" height="400"></canvas>
+<script>
+  const JSONDATA  = {{ $.Site.Data.priceAndHash.data }}
+  const FEARDATA  = {{ $.Site.Data.fearandGreed.data }}
+
+
+  let data = [];
+  let feardata = [];
+
+JSONDATA.forEach((val, ind) => {
+  data.push(val.Close)
+})
+
+FEARDATA.forEach((val, ind) => {
+  feardata.push(val.value)
+})
+
+
+let daysoftheyear = []
+
+for(let i= 0; i< 365; i++){
+  daysoftheyear.push(i)
+}
+
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: daysoftheyear,
+        datasets: [
+        {
+            label: 'price',
+            data: data,
+            borderWidth: 4,
+            borderColor: 'rgb(192, 155, 75)',
+            yAxisID: 'y',
+        },
+        {
+            label: 'fear and greed',
+            data: feardata.reverse(),
+            borderWidth: 3,
+            borderColor: 'rgb(75, 153, 192)',
+            yAxisID: 'y1',
+        }
+
+        ]
+    },
+    options: {
+        scales: {
+          y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+            },
+            y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+
+              // grid line settings
+              grid: {
+                drawOnChartArea: false, // only want the grid lines for one axis to show up
+              },
+            },
+        }
+    }
+});
+</script>
+      </div>
     </div>
   </div>
 </section>
 
-
-
-
-
-  <script type="text/javascript">
-    setTimeout(() => {
-        $(() =>{
-          //ready
-          console.log('data is loading.')
-          const JSONDATA  = {{ $.Site.Data.priceAndHash.data }}
-
-          $.ajax({
-            url: 'https://api.blockchain.info/stats',
-            success: data => {
-
-              JSONDATA.push({
-                price: data.market_price_usd,
-                hash_rate: data.hash_rate
-              })
-
-              console.log(JSONDATA)
-
-              $('#price-and-hash-content').append(`
-              <div class="row" >
-                <div class="col-2">
-                  <p>${data.market_price_usd}</p>
-                </div>
-                <div class="col">
-                  <p>${data.hash_rate}</p>
-                </div>
-              </div>`
-              )
-            }
-          })
-
-        } )
-      }, 500)
-  </script>
 
 
 
